@@ -1,0 +1,39 @@
+apiVersion: db2u.databases.ibm.com/v1
+kind: Db2uCluster
+metadata:
+  name: db2-inst1
+  namespace: ibm-db2
+spec:
+  size: 1
+  license:
+    accept: true
+    
+  account:
+    imagePullSecrets:
+      - ibm-registry
+    privileged: true
+  environment:
+    dbType: db2oltp
+    instance:
+      password: passw0rd
+  version: s11.5.9.0
+  podConfig:
+    db2u:
+      resource:
+        db2u:
+          requests:
+            cpu: 4
+            memory: 16Gi
+          limits:
+            cpu: 4
+            memory: 16Gi
+  storage:
+    - name: share
+      type: create
+      spec:
+        accessModes:
+          - ReadWriteMany
+        resources:
+          requests:
+            storage: 200Gi
+        storageClassName: ocs-storagecluster-cephfs
