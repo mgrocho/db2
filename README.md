@@ -1,7 +1,7 @@
 # db2
 
 
-db2 operations:
+**db2 operations:**
 
 su - db2inst1 <br>
 db2start <br>
